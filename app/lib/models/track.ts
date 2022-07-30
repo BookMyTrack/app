@@ -5,11 +5,12 @@ import { TrackEvent as TrackEvent } from './events'
 
 const nullable = (type: t.Mixed) => t.union([type, t.null])
 
-export const Decoder = t.type({
+export const Track = t.type({
 	id: t.number,
 	name: t.string,
 	description: t.string,
 	image_url: nullable(t.string),
+	map_url: nullable(t.string),
 	latitude: nullable(t.number),
 	longitude: nullable(t.number),
 	address: t.string,
@@ -17,7 +18,7 @@ export const Decoder = t.type({
 	events: t.array(TrackEvent),
 })
 
-export type Track = t.TypeOf<typeof Decoder>
+export type Track = t.TypeOf<typeof Track>
 
 export const getById = (id: number) => api.get<Response<Track>>(`/track/${id}`)
 	.then(response => response.data.entity)

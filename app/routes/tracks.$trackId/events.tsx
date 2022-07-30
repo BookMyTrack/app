@@ -1,15 +1,16 @@
 import type { LoaderFunction } from '@remix-run/node';
 import { json, redirect } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData, useNavigate } from '@remix-run/react';
 import { addMinutes, format, formatDuration } from 'date-fns';
 import { useEffect, useMemo } from 'react';
-import Button from '~/components/Button';
+import { Button } from 'ariakit/button';
 
 
 import { TrackEvent } from '~/lib/models';
 import type { Track } from '~/lib/models/track';
 import { getById } from '~/lib/models/track';
 import { useAppState } from '~/lib/state/app-state';
+import clsx from 'clsx';
 
 export const loader: LoaderFunction = async ( { params } ) => {
 	const id = parseInt( params.trackId! )
@@ -57,6 +58,8 @@ export default function TrackById() {
 }
 
 const TrackDayItem = ( { trackDay }: { trackDay: TrackEvent } ) => {
+	const navigate = useNavigate()
+
 	const date = useMemo( () => {
 		const date = format( new Date( trackDay.start ), 'EEEE, dd MMM yyyy' );
 		const start = format( new Date( trackDay.start ), 'HH:mm' );
@@ -74,13 +77,24 @@ const TrackDayItem = ( { trackDay }: { trackDay: TrackEvent } ) => {
 	}, [trackDay.start, trackDay.duration] );
 
 	return (
-		<li key={trackDay.id} className='rx-bg-neutral-3 rx-border-neutral-6 flex items-center justify-start p-4 border rounded-lg'>
+		<li className='rx-bg-neutral-3 rx-border-neutral-6 flex items-center justify-start p-4 border rounded-lg shadow'>
 			<div>
 				<h3 className='text-lg font-bold'>{trackDay.title}</h3>
 				<time dateTime={date.start}>{date.asString}</time>
 				<p>{date.start} / {date.end} {date.duration !== '' ? `(${date.duration})` : ''}</p>
 			</div>
-			<Button disabled={trackDay.quantity === 0} className='rx-bg-orange-10 ml-auto border !text-white'>
+			<Button
+				onClick={() => navigate( trackDay.url )}
+				disabled={!trackDay.url || trackDay.quantity === 0}
+				className={clsx(
+					'rx-bg-orange-10 ml-auto border text-white rx-border-orange-6',
+					'text-md font-semibold',
+					'flex items-center justify-center gap-4',
+					'py-2 px-4 rounded-lg',
+					'hover:opacity-75 duration-150 transition-all',
+					'disabled:bg-[transparent] disabled:border-[transparent] disabled:rx-text-neutral-11'
+				)}
+			>
 				{trackDay.quantity === 0 ? 'Sold Out' : (
 					trackDay.netPrice === 0 ? 'Free' : `$${trackDay.netPrice}`
 				)}

@@ -1,4 +1,6 @@
 import * as t from 'io-ts'
+import * as tt from 'io-ts-types'
+import { Url, url } from './custom-types/url'
 
 
 export const Organization = t.type({
@@ -20,8 +22,10 @@ export const TrackEvent = t.type({
 	quantity: t.number,
 	track_id: t.number,
 	organization_id: t.number,
-	organization: Organization
+	organization: Organization,
+	url: tt.fromNullable(url, '' as Url)
 })
+
 
 
 export type TrackEvent = t.TypeOf<typeof TrackEvent>
