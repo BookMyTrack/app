@@ -45,7 +45,6 @@ const config = {
   },
   plugins: [
     tc.plugin({
-      debug: true,
       properties: ["bg", "placeholder", "divide", "shadow", "text", "border", "ring"],
       colors: {
         ...tc.colors,
