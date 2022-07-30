@@ -52,7 +52,6 @@ const config = {
         ...palette,
       }
     }),
-    require("tailwindcss-radix"),
     require("@tailwindcss/forms"),
   ],
 };
