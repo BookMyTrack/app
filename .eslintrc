@@ -1,0 +1,33 @@
+{
+  "plugins": [
+    "prettier",
+    "unused-imports"
+  ],
+  "extends": [
+    "@remix-run/eslint-config",
+    "@remix-run/eslint-config/node",
+    "@remix-run/eslint-config/jest-testing-library",
+    "prettier",
+    "@rawnly/eslint-config-ts"
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".ts",
+          ".tsx"
+        ],
+        "moduleDirectory": [
+          "src",
+          "node_modules"
+        ]
+      },
+      "typescript": {
+        "project": "./tsconfig.json"
+      }
+    },
+    "jest": {
+      "version": 27
+    }
+  }
+}
