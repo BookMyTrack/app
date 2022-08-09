@@ -27,18 +27,28 @@ export const meta: MetaFunction = () => ({
 
 export default function App() {
   return (
-    <html lang="en">
+    <html className="dark" lang="en">
       <head>
         <Meta />
         <Links />
       </head>
-      <body className="rx-text-neutral-11 rx-bg-neutral-1">
+      <body className="min-w-screen min-h-screen rx-text-neutral-11 rx-bg-neutral-1">
         <Navbar />
         <div className="max-w-7xl lg:px-8 sm:px-6 w-full px-4 mx-auto">
           <Outlet />
         </div>
+
         <ScrollRestoration />
+
+        <script
+          defer
+          type="text/javascript"
+          src="https://api.pirsch.io/pirsch.js"
+          id="pirschjs"
+          data-code="NCpMPbu3ciXXDoQyfx6YalliE5qAFGBi"
+        ></script>
         <Scripts />
+
         <LiveReload />
       </body>
     </html>

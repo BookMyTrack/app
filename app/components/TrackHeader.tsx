@@ -48,19 +48,23 @@ const TrackHeader: FC<PropsWithChildren<ITrackDaysHeaderProps>> = ({
   }, [track.events]);
 
   return (
-    <div className="lg:flex lg:items-center lg:justify-between rx-text-neutral-11 py-4">
+    <div className="lg:flex lg:items-center rx-bg-neutral-1 lg:justify-between rx-text-neutral-11 py-4">
       <div className="flex-1 min-w-0">
         <h2 className="sm:text-3xl sm:truncate rx-text-neutral-12 text-2xl font-bold leading-7">
           {track.name}
         </h2>
         <div className="sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6 flex flex-col mt-1">
-          <div className="flex items-center mt-2 text-sm">
+          <a
+            href={`https://maps.google.com/?q=${track.latitude},${track.longitude}`}
+            target="_blank"
+            className="flex hover:underline items-center mt-2 text-sm"
+          >
             <LocationMarkerIcon
               className="flex-shrink-0 mr-1.5 h-5 w-5"
               aria-hidden="true"
             />
             {track.address}
-          </div>
+          </a>
           <div className="flex items-center mt-2 text-sm">
             <CurrencyDollarIcon
               className="flex-shrink-0 mr-1.5 h-5 w-5"
@@ -80,6 +84,7 @@ const TrackHeader: FC<PropsWithChildren<ITrackDaysHeaderProps>> = ({
 
       <div>
         <a
+          target="_blank"
           href={`https://maps.google.com/?q=${track.latitude},${track.longitude}`}
         >
           <Button className="flex items-center gap-4">

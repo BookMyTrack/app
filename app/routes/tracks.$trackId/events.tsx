@@ -1,7 +1,7 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { useLoaderData, useNavigate } from "@remix-run/react";
-import { addMinutes, format, formatDistance, formatDuration } from "date-fns";
+import { useLoaderData } from "@remix-run/react";
+import { addMinutes, format, formatDistance } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "ariakit/button";
 
@@ -13,6 +13,7 @@ import { useAppState } from "~/lib/state/app-state";
 import clsx from "clsx";
 import { isRight } from "fp-ts/lib/Either";
 import { PathReporter } from "io-ts/PathReporter";
+import sortBy from "lodash.sortby";
 
 export const loader: LoaderFunction = async ({ params }) => {
   const id = parseInt(params.trackId!);
@@ -46,8 +47,9 @@ export default function TrackById() {
   const events = useMemo(() => {
     if (!track) return {};
 
-    return groupBy(track.events, (item) =>
-      format(new Date(item.start), "dd-MM")
+    return groupBy(
+      sortBy(track.events, (e) => e.start),
+      (item) => format(new Date(item.start), "eeee dd MMM")
     );
   }, [track]);
 
@@ -69,7 +71,9 @@ export default function TrackById() {
         <div key={date} className="py-4">
           <div className="w-full flex items-center justify-start">
             <h3 className="text-lg mr-auto font-bold py-4">{date}</h3>
-            <h3 className="text-lg font-bold py-4">{trackDays.length} Turni</h3>
+            <h3 className="text-lg font-bold py-4">
+              {trackDays.length} Events
+            </h3>
           </div>
           <ul className="lg:grid lg:grid-cols-2 flex flex-col gap-4">
             {trackDays
@@ -116,6 +120,7 @@ const TrackDayItem = ({ trackDay }: { trackDay: TrackEvent }) => {
     <li className="rx-bg-neutral-3 rx-border-neutral-6 flex items-center justify-start p-4 border rounded-lg shadow">
       <div>
         <h3 className="text-lg font-bold">{trackDay.title}</h3>
+        <p className="uppercase mb-2 font-medium">{trackDay.description}</p>
         <time dateTime={date.start}>{date.asString}</time>
         <p>
           {date.start} - {date.end}{" "}

@@ -9,7 +9,7 @@ interface INavbarProps {}
 
 const Navbar: FC<PropsWithChildren<INavbarProps>> = (props) => {
   return (
-    <nav className="rx-border-neutral-6 flex items-center justify-between p-4 border-b">
+    <nav className="rx-border-neutral-6 top-0 border-b rx-border-neutral-6 sticky rx-bg-neutral-1 flex items-center justify-between p-4 border-b">
       <Link to="/">
         <div className="flex items-center gap-5">
           <img src="/logo.png" alt="BookMyTrack" className="w-12 rounded-md" />
