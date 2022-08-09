@@ -25,6 +25,8 @@ export const meta: MetaFunction = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
+// "NCpMPbu3ciXXDoQyfx6YalliE5qAFGBi"
+//
 export default function App() {
   return (
     <html className="dark" lang="en">
@@ -45,7 +47,7 @@ export default function App() {
           type="text/javascript"
           src="https://api.pirsch.io/pirsch.js"
           id="pirschjs"
-          data-code="NCpMPbu3ciXXDoQyfx6YalliE5qAFGBi"
+          data-code="F7N9mSGHbl2AWeeVOYn7hQTge0ievh48"
         ></script>
         <Scripts />
 
