@@ -43,7 +43,7 @@ const TrackCard: FC<PropsWithChildren<ITrackCardProps>> = ({ track }) => {
           <div className="px-8 mx-auto">
             <img
               alt={track.name}
-              src={track.image_url ?? `/track-images/${track.id}.svg`}
+              src={track.track_path_url ?? `/track-images/${track.id}.svg`}
             />
           </div>
           <div className="flex flex-col items-start justify-start w-full p-4 text-white">
