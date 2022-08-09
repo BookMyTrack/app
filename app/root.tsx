@@ -7,6 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 
 import styles from "./styles/tailwind.css";
@@ -34,11 +35,12 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="min-w-screen min-h-screen rx-text-neutral-11 rx-bg-neutral-1">
+      <body className="min-w-screen flex flex-col min-h-screen rx-text-neutral-11 rx-bg-neutral-1">
         <Navbar />
-        <div className="max-w-7xl lg:px-8 sm:px-6 w-full px-4 mx-auto">
+        <div className="max-w-7xl flex-1 lg:px-8 sm:px-6 w-full px-4 mx-auto">
           <Outlet />
         </div>
+        <Footer />
 
         <ScrollRestoration />
 
