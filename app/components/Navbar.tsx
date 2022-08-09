@@ -1,13 +1,12 @@
 import { SupportIcon } from "@heroicons/react/outline";
 import { Link } from "@remix-run/react";
 import type { FC, PropsWithChildren } from "react";
-import React from "react";
 
 import Button from "./Button";
 
 interface INavbarProps {}
 
-const Navbar: FC<PropsWithChildren<INavbarProps>> = (props) => {
+const Navbar: FC<PropsWithChildren<INavbarProps>> = () => {
   return (
     <nav className="rx-border-neutral-6 top-0 border-b rx-border-neutral-6 sticky rx-bg-neutral-1 flex items-center justify-between p-4 border-b">
       <Link to="/">
@@ -20,7 +19,12 @@ const Navbar: FC<PropsWithChildren<INavbarProps>> = (props) => {
       </Link>
 
       <div>
-        <Button className="flex items-center gap-4">
+        <Button
+          as="a"
+          href="https://wa.me/message/2WMFROGBWFBGO1"
+          target="_blank"
+          className="flex items-center gap-4"
+        >
           <SupportIcon className="w-5" />
           Support
         </Button>
