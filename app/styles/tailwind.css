@@ -745,14 +745,6 @@ select {
   top: 0px;
 }
 
-.top-8 {
-  top: 2rem;
-}
-
-.top-16 {
-  top: 4rem;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -808,16 +800,16 @@ select {
   margin-top: 1rem;
 }
 
-.ml-auto {
-  margin-left: auto;
-}
-
 .mr-auto {
   margin-right: auto;
 }
 
 .mb-2 {
   margin-bottom: 0.5rem;
+}
+
+.ml-auto {
+  margin-left: auto;
 }
 
 .block {
@@ -858,10 +850,6 @@ select {
 
 .min-h-screen {
   min-height: 100vh;
-}
-
-.min-h-full {
-  min-height: 100%;
 }
 
 .w-full {
@@ -906,10 +894,6 @@ select {
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .grid-cols-1 {
@@ -1067,6 +1051,11 @@ select {
   padding-bottom: 0.5rem;
 }
 
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
 .py-12 {
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -1097,23 +1086,18 @@ select {
   padding-bottom: 4rem;
 }
 
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
 .text-center {
   text-align: center;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
 }
 
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .text-lg {
@@ -1170,11 +1154,6 @@ select {
 
 .text-white\/80 {
   color: rgb(255 255 255 / 0.8);
-}
-
-.underline {
-  -webkit-text-decoration-line: underline;
-          text-decoration-line: underline;
 }
 
 .shadow {
@@ -1263,16 +1242,6 @@ select {
 .dark .rx-bg-neutral-3 {
   --tw-bg-opacity: 1;
   background-color: rgb(35 35 38 / var(--tw-bg-opacity));
-}
-
-.rx-bg-neutral-6 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(228 226 228 / var(--tw-bg-opacity));
-}
-
-.dark .rx-bg-neutral-6 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(52 52 58 / var(--tw-bg-opacity));
 }
 
 .rx-border-neutral-6 {

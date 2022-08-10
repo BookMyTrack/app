@@ -8,7 +8,7 @@
     "build:css": "npm run generate:css -- --minify",
     "dev": "run-p dev:*",
     "dev:css": "npm run generate:css -- --watch",
-    "dev:remix": "NODE_ENV=development binode --require ./mock -- @remix-run/dev:remix dev",
+    "dev:remix": "NODE_ENV=development remix dev",
     "deploy": "fly deploy --remote-only",
     "start": "remix-serve build",
     "generate:css": "tailwindcss -i ./app/styles/tailwind.input.css -o ./app/styles/tailwind.css",

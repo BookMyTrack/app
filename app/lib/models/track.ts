@@ -16,7 +16,7 @@ export const Track = t.type({
   // map_url: nullable(t.string),
   latitude: nullable(t.number),
   longitude: nullable(t.number),
-  address: t.string,
+  address: nullable(t.string),
   // available: t.boolean,
   events: t.array(TrackEvent),
 });

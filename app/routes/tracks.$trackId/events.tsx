@@ -82,7 +82,7 @@ export default function TrackById() {
                 <TrackDayItem trackDay={trackDay} key={trackDay.id} />
               ))}
           </ul>
-          {!expanded[date] && (
+          {!expanded[date] && trackDays.length > 4 && (
             <Button
               className="w-full py-4 mt-4 rounded-lg rx-bg-neutral-2 hover:rx-bg-neutral-3 flex items-center justify-center"
               onClick={() => setExpanded((s) => ({ ...s, [date]: true }))}
@@ -145,7 +145,7 @@ const TrackDayItem = ({ trackDay }: { trackDay: TrackEvent }) => {
           ? "Sold Out"
           : trackDay.netPrice === 0
           ? "Free"
-          : `$${trackDay.netPrice}`}
+          : `€${trackDay.netPrice}`}
       </Button>
     </li>
   );
