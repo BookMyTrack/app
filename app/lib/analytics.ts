@@ -34,13 +34,19 @@ export const trackEvent = (
     return;
   }
 
-  return pirschClient.post(PirschEndpoint.EVENT, {
+  const payload = {
     identification_code: "F7N9mSGHbl2AWeeVOYn7hQTge0ievh48",
     event_name: name,
     event_duration: duration,
-    event_meta: data,
+    event_meta: prepareScalarObject(data),
     ...hit,
-  });
+  };
+
+  const options = {
+    headers: { "Content-Type": "application/json" },
+  };
+
+  return pirschClient.post(PirschEndpoint.EVENT, payload, options);
 };
 
 const hitFromBrowser = () => {
@@ -58,3 +64,21 @@ const hitFromBrowser = () => {
 
   return element;
 };
+
+function prepareScalarObject(
+  value?: Record<string, Scalar>
+): Record<string, string> | undefined {
+  if (!value) {
+    return value;
+  }
+
+  return Object.fromEntries(
+    Object.entries(value).map(([key, value]) => {
+      if (typeof value === "string") {
+        return [key, value];
+      }
+
+      return [key, value.toString()];
+    })
+  );
+}
