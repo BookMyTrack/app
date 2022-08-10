@@ -14,6 +14,7 @@ import clsx from "clsx";
 import { isRight } from "fp-ts/lib/Either";
 import { PathReporter } from "io-ts/PathReporter";
 import sortBy from "lodash.sortby";
+import { trackEvent } from "~/lib/analytics";
 
 export const loader: LoaderFunction = async ({ params }) => {
   const id = parseInt(params.trackId!);
@@ -32,23 +33,26 @@ export const loader: LoaderFunction = async ({ params }) => {
 
     console.error(PathReporter.report(decoded));
 
-    return redirect("/");
+    return redirect("/?error_code=001&id=" + id);
   } catch (error) {
     console.error(error);
 
-    return redirect("/");
+    return redirect("/?error_code=unknown&id=" + id);
   }
 };
 
 export default function TrackById() {
-  const track: Track = useLoaderData();
+  const track: Track = useLoaderData<typeof loader>();
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const setTrack = useAppState((s) => s.setTrack);
   const events = useMemo(() => {
     if (!track) return {};
 
     return groupBy(
-      sortBy(track.events, (e) => e.start),
+      sortBy(
+        track.events.filter((e) => e.start >= Date.now()),
+        (e) => e.start
+      ),
       (item) => format(new Date(item.start), "eeee dd MMM")
     );
   }, [track]);
@@ -85,7 +89,13 @@ export default function TrackById() {
           {!expanded[date] && trackDays.length > 4 && (
             <Button
               className="w-full py-4 mt-4 rounded-lg rx-bg-neutral-2 hover:rx-bg-neutral-3 flex items-center justify-center"
-              onClick={() => setExpanded((s) => ({ ...s, [date]: true }))}
+              onClick={() => {
+                setExpanded((s) => ({ ...s, [date]: true }));
+                trackEvent("expand-events", 0, {
+                  trackId: track.id,
+                  trackName: track.name,
+                });
+              }}
             >
               View More
             </Button>
@@ -99,9 +109,7 @@ export default function TrackById() {
 const TrackDayItem = ({ trackDay }: { trackDay: TrackEvent }) => {
   const date = useMemo(() => {
     const date = format(trackDay.start, "EEEE, dd MMM yyyy");
-
     const end = addMinutes(trackDay.start, trackDay.duration);
-
     const startHour = format(trackDay.start, "HH:mm");
     const endHour = format(
       addMinutes(trackDay.start, trackDay.duration),
@@ -130,7 +138,12 @@ const TrackDayItem = ({ trackDay }: { trackDay: TrackEvent }) => {
         </p>
       </div>
       <Button
-        onClick={() => window.open(`${trackDay.url}?ref=bookmytrack`, "_blank")}
+        as="a"
+        href={`${trackDay.url}?ref=bookmytrack`}
+        target="_blank"
+        onClick={() =>
+          trackEvent("track-day-click", 0, { track_id: trackDay.track_id })
+        }
         disabled={!trackDay.url || trackDay.quantity === 0}
         className={clsx(
           "rx-bg-orange-10 ml-auto border text-white rx-border-orange-6",
