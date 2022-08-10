@@ -24,24 +24,29 @@ export default function Index() {
   const setTrack = useAppState((s) => s.setTrack);
 
   return (
-    <div className="max-w-8xl justify-items-center grid items-start w-full h-full md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 p-8 mx-auto">
-      {tracks && tracks.length === 0 && <p> No tracks available </p>}
-      {tracks.map((track) => (
-        <Link
-          to={`/tracks/${track.id}/events`}
-          key={track.id}
-          className="flex max-w-[300px] items-center justify-center"
-          onClick={() => {
-            setTrack(track);
-            trackEvent("track-click", 0, {
-              trackId: track.id,
-              trackName: track.name,
-            });
-          }}
-        >
-          <TrackCard track={track} />
-        </Link>
-      ))}
+    <div className="max-w-8xl justify-items-center w-full h-full p-8 mx-auto">
+      <h1 className="text-2xl text-center md:text-left md:text-3xl rx-text-neutral-12 font-bold mb-8">
+        Choose your favorite track
+      </h1>
+      <div className="flex items-start justify-center sm:justify-evenly md:justify-start gap-8 flex-wrap">
+        {tracks && tracks.length === 0 && <p> No tracks available </p>}
+        {tracks.map((track) => (
+          <Link
+            to={`/tracks/${track.id}/events`}
+            key={track.id}
+            className="flex max-w-[300px] items-center justify-center"
+            onClick={() => {
+              setTrack(track);
+              trackEvent("track-click", 0, {
+                trackId: track.id,
+                trackName: track.name,
+              });
+            }}
+          >
+            <TrackCard track={track} />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

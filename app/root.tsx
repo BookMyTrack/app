@@ -1,4 +1,9 @@
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import {
+  json,
+  LinksFunction,
+  LoaderFunction,
+  MetaFunction,
+} from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -6,6 +11,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -30,9 +36,18 @@ export const meta: MetaFunction = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
-// "NCpMPbu3ciXXDoQyfx6YalliE5qAFGBi"
-//
+export const loader = async () => {
+  const PIRSCH_ID = process.env.PIRSCH_ID!;
+  const MAPBOX_ACCESS_KEY = process.env.MAPBOX_ACCESS_KEY!;
+
+  return json({
+    ENV: { PIRSCH_ID, MAPBOX_ACCESS_KEY },
+  });
+};
+
 export default function App() {
+  const { ENV } = useLoaderData<typeof loader>();
+
   return (
     <html className="dark" lang="en">
       <head>
@@ -53,10 +68,16 @@ export default function App() {
           type="text/javascript"
           src="https://api.pirsch.io/pirsch.js"
           id="pirschjs"
-          data-code="F7N9mSGHbl2AWeeVOYn7hQTge0ievh48"
+          data-code={ENV.PIRSCH_ID}
         ></script>
-        <Scripts />
 
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(ENV)}`,
+          }}
+        />
+
+        <Scripts />
         <LiveReload />
       </body>
     </html>

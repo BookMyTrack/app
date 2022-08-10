@@ -20,9 +20,7 @@ const TrackDetailLayout: FC<
             <TrackHeader track={track.value} />
           </div>
           <Map
-            mapboxAccessToken={
-              "pk.eyJ1IjoicmF3bmx5IiwiYSI6ImNsNm5wNXEycjAyeW0zbHQxYm9laGFmbHQifQ.wAPW7MZv6BDNwiU0uI1RuQ"
-            }
+            mapboxAccessToken={(window as any).ENV.MAPBOX_ACCESS_KEY}
             mapStyle="mapbox://styles/rawnly/ck8d08zcr2drx1imyqmq9apoe"
             dragPan={false}
             scrollZoom={false}
