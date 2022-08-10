@@ -2,3 +2,7 @@
 @tailwind utilities;
 @tailwind variants;
 @tailwind components;
+
+.mapboxgl-ctrl-bottom-left {
+  display: none;
+}

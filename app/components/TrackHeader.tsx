@@ -48,7 +48,7 @@ const TrackHeader: FC<PropsWithChildren<ITrackDaysHeaderProps>> = ({
   }, [track.events]);
 
   return (
-    <div className="lg:flex lg:items-center rx-bg-neutral-1 lg:justify-between rx-text-neutral-11 py-4">
+    <div className="lg:flex w-full lg:items-center lg:justify-between rx-text-neutral-11 py-4">
       <div className="flex-1 min-w-0">
         <h2 className="sm:text-3xl sm:truncate rx-text-neutral-12 text-2xl font-bold leading-7">
           {track.name}
@@ -80,18 +80,6 @@ const TrackHeader: FC<PropsWithChildren<ITrackDaysHeaderProps>> = ({
             {datesRange}
           </div>
         </div>
-      </div>
-
-      <div>
-        <a
-          target="_blank"
-          href={`https://maps.google.com/?q=${track.latitude},${track.longitude}`}
-        >
-          <Button className="flex items-center gap-4">
-            <MapIcon className="w-5" />
-            Open in Maps
-          </Button>
-        </a>
       </div>
     </div>
   );

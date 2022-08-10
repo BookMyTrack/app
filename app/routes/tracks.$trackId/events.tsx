@@ -4,6 +4,7 @@ import { useLoaderData } from "@remix-run/react";
 import { addMinutes, format, formatDistance } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "ariakit/button";
+import Map from "react-map-gl";
 
 import groupBy from "lodash.groupby";
 import { TrackEvent } from "~/lib/models";

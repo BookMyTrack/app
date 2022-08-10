@@ -17,6 +17,10 @@ export const links: LinksFunction = () => [
     rel: "stylesheet",
     href: styles,
   },
+  {
+    rel: "stylesheet",
+    href: "https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css",
+  },
 ];
 
 export const meta: MetaFunction = () => ({

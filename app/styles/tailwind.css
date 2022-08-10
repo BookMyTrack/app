@@ -732,6 +732,10 @@ select {
   border-width: 0;
 }
 
+.absolute {
+  position: absolute;
+}
+
 .relative {
   position: relative;
 }
@@ -741,8 +745,19 @@ select {
   position: sticky;
 }
 
+.inset-0 {
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
 .top-0 {
   top: 0px;
+}
+
+.z-50 {
+  z-index: 50;
 }
 
 .mx-auto {
@@ -912,6 +927,10 @@ select {
   align-items: flex-start;
 }
 
+.items-end {
+  align-items: flex-end;
+}
+
 .items-center {
   align-items: center;
 }
@@ -1015,6 +1034,10 @@ select {
   background-color: rgb(0 0 0 / 0.25);
 }
 
+.bg-\[rgba\(0\2c 0\2c 0\2c \.35\)\] {
+  background-color: rgba(0,0,0,.35);
+}
+
 .bg-gradient-to-t {
   background-image: linear-gradient(to top, var(--tw-gradient-stops));
 }
@@ -1079,11 +1102,6 @@ select {
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-}
-
-.py-16 {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
 }
 
 .text-center {
@@ -1441,4 +1459,8 @@ select {
     padding-left: 2rem;
     padding-right: 2rem;
   }
+}
+
+.mapboxgl-ctrl-bottom-left {
+  display: none;
 }
