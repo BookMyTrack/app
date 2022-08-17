@@ -25,14 +25,14 @@ export type Track = t.TypeOf<typeof Track>;
 
 export const getById = (id: number) =>
   api
-    .get<Response<Track>>(`/track/${id}`, {
+    .get<Response<Track>>(`/generated/track/${id}`, {
       params: { responseSkipFields: "weather" },
     })
     .then((response) => response.data.entity);
 
 export const getAll = () =>
   api
-    .get<Response<Track[]>>("/track", {
+    .get<Response<Track[]>>("/generated/track", {
       params: { responseSkipFields: "weather" },
     })
     .then((response) => response.data.entity.data);

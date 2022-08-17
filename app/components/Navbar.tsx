@@ -18,7 +18,23 @@ const Navbar: FC<PropsWithChildren<INavbarProps>> = () => {
         </div>
       </Link>
 
-      <div>
+      <div className="flex gap-4">
+        <Button
+          as={Link}
+          to="/tips"
+          className="flex rx-text-neutral-11 hover:rx-bg-neutral-3 items-center gap-4"
+          primary={false}
+        >
+          Tips
+        </Button>
+        <Button
+          as={Link}
+          to="/frequently-asked-questions"
+          className="flex rx-text-neutral-11 hover:rx-bg-neutral-3 items-center gap-4"
+          primary={false}
+        >
+          FAQ
+        </Button>
         <Button
           as="a"
           href="https://wa.me/message/2WMFROGBWFBGO1"

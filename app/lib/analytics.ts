@@ -1,4 +1,6 @@
 import axios from "axios";
+import { Pirsch } from "pirsch-sdk/web";
+
 import {
   PirschEndpoint,
   PIRSCH_DEFAULT_BASE_URL,
@@ -7,12 +9,22 @@ import {
 } from "pirsch-sdk/constants";
 import { PirschBrowserHit, Scalar } from "pirsch-sdk/types";
 
+export const pirsch = new Pirsch({
+  identificationCode: "F7N9mSGHbl2AWeeVOYn7hQTge0ievh48",
+});
+
 const pirschClient = axios.create({
   baseURL: PIRSCH_DEFAULT_BASE_URL,
   timeout: PIRSCH_DEFAULT_TIMEOUT,
 });
 
 export const trackEvent = (
+  name: string,
+  duration?: number,
+  data?: Record<string, Scalar>
+) => pirsch.event(name, duration, data);
+
+export const trackEvent_old = (
   name: string,
   duration?: number,
   data?: Record<string, Scalar>

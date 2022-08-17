@@ -815,6 +815,10 @@ select {
   margin-top: 1rem;
 }
 
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
 .mr-auto {
   margin-right: auto;
 }
@@ -827,22 +831,6 @@ select {
   margin-left: auto;
 }
 
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.mb-6 {
-  margin-bottom: 1.5rem;
-}
-
-.mb-7 {
-  margin-bottom: 1.75rem;
-}
-
-.mb-8 {
-  margin-bottom: 2rem;
-}
-
 .block {
   display: block;
 }
@@ -853,10 +841,6 @@ select {
 
 .inline-flex {
   display: inline-flex;
-}
-
-.grid {
-  display: grid;
 }
 
 .h-6 {
@@ -925,10 +909,6 @@ select {
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.grid-cols-1 {
-  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -1149,16 +1129,6 @@ select {
   line-height: 1rem;
 }
 
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
 .font-black {
   font-weight: 900;
 }
@@ -1230,6 +1200,16 @@ select {
 
 .duration-150 {
   transition-duration: 150ms;
+}
+
+.rx-bg-orange-3 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 241 231 / var(--tw-bg-opacity));
+}
+
+.dark .rx-bg-orange-3 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(57 26 3 / var(--tw-bg-opacity));
 }
 
 .rx-border-orange-6 {
@@ -1351,6 +1331,16 @@ select {
   background-color: rgb(35 35 38 / var(--tw-bg-opacity));
 }
 
+.hover\:rx-bg-neutral-4:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(238 237 239 / var(--tw-bg-opacity));
+}
+
+.dark .hover\:rx-bg-neutral-4:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(40 40 44 / var(--tw-bg-opacity));
+}
+
 .disabled\:border-\[transparent\]:disabled {
   border-color: transparent;
 }
@@ -1380,10 +1370,6 @@ select {
 
   .sm\:flex {
     display: flex;
-  }
-
-  .sm\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .sm\:flex-row {
@@ -1427,10 +1413,6 @@ select {
     padding-right: 1.5rem;
   }
 
-  .sm\:text-left {
-    text-align: left;
-  }
-
   .sm\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -1448,14 +1430,6 @@ select {
 
   .md\:flex {
     display: flex;
-  }
-
-  .md\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .md\:items-start {
-    align-items: flex-start;
   }
 
   .md\:items-center {
