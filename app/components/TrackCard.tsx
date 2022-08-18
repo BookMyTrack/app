@@ -3,7 +3,6 @@ import clsx from "clsx";
 import type { FC, PropsWithChildren } from "react";
 import React, { useMemo } from "react";
 import { compareDesc, differenceInDays } from "date-fns";
-import Map from "react-map-gl";
 
 import type { Track } from "~/lib/models/track";
 

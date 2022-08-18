@@ -2,7 +2,6 @@ import {
   CalendarIcon,
   CurrencyDollarIcon,
   LocationMarkerIcon,
-  MapIcon,
 } from "@heroicons/react/outline";
 import format from "date-fns/format";
 import type { FC, PropsWithChildren } from "react";
@@ -10,41 +9,54 @@ import React, { useMemo } from "react";
 
 import type { TrackEvent } from "~/lib/models/events";
 import type { Track } from "~/lib/models/track";
-import Button from "./Button";
+import { CurrencyFormatter } from "../lib/CurrencyFormatter";
 
 interface ITrackDaysHeaderProps {
   track: Track;
 }
 
-const getPriceRange = (events: TrackEvent[]): [min: number, max: number] => {
+export const currencyFormatter = new CurrencyFormatter("it-IT", "EUR");
+
+export const getPriceRange = (
+  events: TrackEvent[]
+): [min: number, max: number] => {
   const prices = events.map((event) => event.netPrice);
   return [Math.min(...prices), Math.max(...prices)];
+};
+
+export const displayPriceRange = (events: TrackEvent[]) => {
+  const [min = 0, max = 0] = getPriceRange(events);
+
+  if (min === Infinity || max === Infinity) return "--";
+
+  if (min === max) return currencyFormatter.format(min);
+
+  return `${currencyFormatter.format(min)} - ${currencyFormatter.format(max)}`;
+};
+
+export const getDatesRange = (events: TrackEvent[]) => {
+  const dates = events
+    ?.map((track) => new Date(track.start))
+    .sort((a, b) => a.getTime() - b.getTime());
+
+  if (dates.length === 0) return "--";
+  if (dates.length === 1) return format(dates[0], "MMM");
+
+  return `${format(dates[0], "MMM")} - ${format(
+    dates[dates.length - 1],
+    "MMM"
+  )}`;
 };
 
 const TrackHeader: FC<PropsWithChildren<ITrackDaysHeaderProps>> = ({
   track,
 }) => {
   const priceRange = useMemo(() => {
-    const [min = 0, max = 0] = getPriceRange(track?.events);
-
-    if (min === Infinity || max === Infinity) return "--";
-
-    if (min === max) return `$${min}`;
-    return `$${min} - $${max}`;
+    return displayPriceRange(track?.events ?? []);
   }, [track]);
 
   const datesRange = useMemo(() => {
-    const dates = track.events
-      ?.map((track) => new Date(track.start))
-      .sort((a, b) => a.getTime() - b.getTime());
-
-    if (dates.length === 0) return "--";
-
-    if (dates.length === 1) return format(dates[0], "MMM");
-    return `${format(dates[0], "MMM")} - ${format(
-      dates[dates.length - 1],
-      "MMM"
-    )}`;
+    return getDatesRange(track?.events ?? []);
   }, [track.events]);
 
   return (

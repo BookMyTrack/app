@@ -1,22 +1,34 @@
 import { Outlet } from "@remix-run/react";
-import React, { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, useEffect } from "react";
 import TrackHeader from "~/components/TrackHeader";
 import { useAppState } from "~/lib/state/app-state";
 import * as O from "fp-ts/Option";
 import Map from "react-map-gl";
+import { useInView } from "react-intersection-observer";
 
 interface ITrackDetailLayoutProps {}
 
 const TrackDetailLayout: FC<
   PropsWithChildren<ITrackDetailLayoutProps>
 > = () => {
-  const track = useAppState((s) => s.track);
+  const { ref, inView } = useInView();
+  const [track, setExtraNavVisibility] = useAppState((s) => [
+    s.track,
+    s.setExtraNavVisible,
+  ]);
+
+  useEffect(() => {
+    setExtraNavVisibility(!inView);
+  }, [inView]);
 
   return (
     <>
       {O.isSome(track) && (
-        <div className="w-full relative mt-8 h-[300px] overflow-hidden rounded-lg">
-          <div className="inset-0 p-8 flex items-start justify-end flex-col absolute bg-[rgba(0,0,0,.35)] z-50">
+        <div
+          ref={ref}
+          className="w-full relative mt-8 h-[300px] overflow-hidden rounded-lg"
+        >
+          <div className="inset-0 p-8 flex items-start justify-end flex-col absolute bg-[rgba(0,0,0,.35)] z-10">
             <TrackHeader track={track.value} />
           </div>
           <Map

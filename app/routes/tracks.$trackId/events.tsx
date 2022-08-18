@@ -16,6 +16,7 @@ import { isRight } from "fp-ts/lib/Either";
 import { PathReporter } from "io-ts/PathReporter";
 import sortBy from "lodash.sortby";
 import { trackEvent } from "~/lib/analytics";
+import { currencyFormatter } from "~/components/TrackHeader";
 
 export const loader: LoaderFunction = async ({ params }) => {
   const id = parseInt(params.trackId!);
@@ -159,7 +160,7 @@ const TrackDayItem = ({ trackDay }: { trackDay: TrackEvent }) => {
           ? "Sold Out"
           : trackDay.netPrice === 0
           ? "Free"
-          : `€${trackDay.netPrice}`}
+          : currencyFormatter.format(trackDay.netPrice)}
       </Button>
     </li>
   );
