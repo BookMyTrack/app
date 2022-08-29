@@ -1,7 +1,7 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { addMinutes, format, formatDistance } from "date-fns";
+import { addMinutes, format, formatDistance, isFuture } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "ariakit/button";
 import Map from "react-map-gl";
@@ -52,10 +52,10 @@ export default function TrackById() {
 
     return groupBy(
       sortBy(
-        track.events.filter((e) => e.start >= Date.now()),
+        track.events.filter((e) => isFuture(e.start)),
         (e) => e.start
       ),
-      (item) => format(new Date(item.start), "eeee dd MMM")
+      (item) => format(item.start, "eeee dd MMM")
     );
   }, [track]);
 

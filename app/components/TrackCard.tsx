@@ -1,8 +1,8 @@
 import { CalendarIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
-import type { FC, PropsWithChildren } from "react";
-import React, { useMemo } from "react";
-import { compareDesc, differenceInDays } from "date-fns";
+import { FC, PropsWithChildren } from "react";
+import { useMemo } from "react";
+import { compareAsc, differenceInDays, isFuture } from "date-fns";
 
 import type { Track } from "~/lib/models/track";
 
@@ -13,9 +13,9 @@ interface ITrackCardProps {
 const TrackCard: FC<PropsWithChildren<ITrackCardProps>> = ({ track }) => {
   const event = useMemo(
     () =>
-      track.events.sort((a, b) =>
-        compareDesc(new Date(a.start), new Date(b.start))
-      )?.[0],
+      track.events
+        .filter((evt) => isFuture(evt.start))
+        .sort((a, b) => compareAsc(a.start, b.start))?.[0],
     [track]
   );
 

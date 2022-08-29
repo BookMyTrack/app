@@ -5,18 +5,17 @@ import { Link, useLoaderData } from "@remix-run/react";
 import TrackCard from "~/components/TrackCard";
 import { trackEvent } from "~/lib/analytics";
 import { useAppState } from "~/lib/state/app-state";
-
 import * as track from "../lib/models/track";
 
 export const loader: LoaderFunction = async () => {
-  try {
-    const response = await track.getAll();
+  const response = await track.getAll();
 
-    return json(response);
-  } catch (error) {
-    console.error(error);
+  if (response._tag === "Left") {
+    console.error(response.left);
     return json([]);
   }
+
+  return json(response.right);
 };
 
 export default function Index() {

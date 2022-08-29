@@ -1,4 +1,5 @@
 import format from "date-fns/format";
+import parseISO from "date-fns/parseISO";
 import * as E from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import * as t from "io-ts";
@@ -20,7 +21,7 @@ export const FormattedDateFromNumber = (stringFormat: string) =>
             : t.success(format(d, stringFormat));
         })
       ),
-    (a) => new Date(a).getTime()
+    (a) => parseISO(a).getTime()
   );
 
 export interface TimestampFromStringDateC
@@ -31,7 +32,7 @@ export const TimestampFromStringDate = new t.Type<number, string, unknown>(
   (u, c) =>
     pipe(
       t.string.validate(u, c),
-      E.map((s) => new Date(s).getTime())
+      E.map((s) => parseISO(s).getTime())
     ),
   (a) => new Date(a).toISOString()
 );

@@ -42,8 +42,8 @@ const TrackDetailLayout: FC<
             }}
             attributionControl={false}
             initialViewState={{
-              latitude: track.value.latitude,
-              longitude: track.value.longitude,
+              latitude: track.value.latitude ?? undefined,
+              longitude: track.value.longitude ?? undefined,
               zoom: 14,
               bearing: 90,
               pitch: 15,
